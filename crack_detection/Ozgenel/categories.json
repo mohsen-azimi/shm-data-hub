@@ -1,0 +1,39 @@
+{
+	"info": {"categories_color_bin_size": 100},
+	"licenses": [],
+	"images": [
+		{
+			"file_name": "0.jpg",
+			"height": 0,
+			"width": 0,
+			"id": 0
+		}
+	],
+	"categories": [
+		{
+			"supercategory": "concrete",
+			"color": [
+				150,
+				150,
+				150
+			],
+			"isthing": 0,
+			"id": 0,
+			"name": "concrete"
+		},
+
+
+		{
+			"supercategory": "crack",
+			"color": [
+				0,
+				0,
+				255
+			],
+			"isthing": 1,
+			"id": 1,
+			"name": "crack"
+		}
+
+	]
+}
