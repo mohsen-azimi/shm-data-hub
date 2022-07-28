@@ -8,9 +8,9 @@ import glob
 import numpy as np
 
 # ----------------------------------------------------------------------------------------------------------------------
-download_dataset = True  # skip this step if you already have the dataset
-fix_file_names = True  # skip this step if you already have the dataset
-convert_to_binary = True  # skip this step if you already have the dataset
+download = False  # skip this step if you already have the dataset
+fix = True  # skip this step if you already have the dataset
+convert = True  # skip this step if you already have the dataset
 # ----------------------------------------------------------------------------------------------------------------------
 for DIR in ['../../../datasets/ozgenel/panoptic', '../../../datasets/ozgenel/annotations']:
     if os.path.exists(DIR) and os.path.isdir(DIR):
@@ -18,13 +18,13 @@ for DIR in ['../../../datasets/ozgenel/panoptic', '../../../datasets/ozgenel/ann
     if not os.path.exists(DIR):  # make empty folders
         os.makedirs(DIR)
 # ----------------------------------------------------------------------------------------------------------------------
-if download_dataset:
+if download:
     print("Downloading the dataset...")
     subprocess.call(["bash", "download_dataset.sh"])
     print("Downloaded the dataset!")
 # #######################################################################################################################
 # Fix file name issues
-if fix_file_names:
+if fix:
 
     PATH = "../../../datasets/ozgenel/"
     # fix naming issues
@@ -49,7 +49,7 @@ if fix_file_names:
 
 # #######################################################################################################################
 # Convert JPG to PNG
-if convert_to_binary:
+if convert:
 
     PATH = "../../../datasets/ozgenel/"
 
@@ -60,5 +60,9 @@ if convert_to_binary:
         thresh = 127
         mask = cv2.threshold(grayImage, thresh, 255, cv2.THRESH_BINARY)[1]
 
-        cv2.imwrite(file.split(".jpg")[0] + ".png", mask)
+        cv2.imwrite(PATH+'BW_png/'+file.split(".jpg")[0][-3:] + ".png", mask)
+        os.system('clear')
+        print(f'{index}/{len(glob.glob(PATH + "BW/*.jpg"))}')
+
+
 print("Files are ready!")

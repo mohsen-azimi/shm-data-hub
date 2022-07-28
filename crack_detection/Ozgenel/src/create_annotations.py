@@ -69,9 +69,16 @@ class CreateCocoFormatInstances():
         mask = cv2.imread(mask_image, cv2.IMREAD_GRAYSCALE)
         # label the mask instances
         labeled_array, num_features = label(mask)  # label the image
+        print(f"{num_features} instances found in {mask_image}")
         mask = labeled_array.astype(np.uint8)  # panoptic masks: 0: Concrete, 1+ == Crack
 
-        cv2.imwrite("panoptic/" + self.cache_file_name.split(".")[0] + ".png", mask * 255)  # save the panoptic mask
+        colors = np.array(
+            [[0, 0, 0], [255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255], [0, 255, 255],
+             [255, 255, 255],
+             [155, 0, 0], [0, 155, 0], [0, 0, 155], [155, 155, 0], [155, 0, 155], [0, 155, 155], [155, 155, 155]])
+
+        mask_rgb = colors[mask]
+        cv2.imwrite("../../../datasets/ozgenel/panoptic/" + self.cache_file_name.split(".")[0] + ".png", mask_rgb)
 
         # update the coco format with the image info
         image = {

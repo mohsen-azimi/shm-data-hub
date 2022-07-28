@@ -1,6 +1,7 @@
 #!/bin/sh
 mkdir -p ../../../datasets/ozgenel/panoptic
 mkdir -p ../../../datasets/ozgenel/annotations
+
 cd ../../../datasets/ozgenel
 
 
