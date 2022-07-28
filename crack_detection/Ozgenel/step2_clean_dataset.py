@@ -8,20 +8,20 @@ import glob
 import numpy as np
 
 # ----------------------------------------------------------------------------------------------------------------------
-download = False  # skip this step if you already have the dataset
+# download = False  # skip this step if you already have the dataset
 fix = True  # skip this step if you already have the dataset
 convert = True  # skip this step if you already have the dataset
-# ----------------------------------------------------------------------------------------------------------------------
-for DIR in ['../../../datasets/ozgenel/panoptic', '../../../datasets/ozgenel/annotations']:
-    if os.path.exists(DIR) and os.path.isdir(DIR):
-        shutil.rmtree(DIR)
-    if not os.path.exists(DIR):  # make empty folders
-        os.makedirs(DIR)
-# ----------------------------------------------------------------------------------------------------------------------
-if download:
-    print("Downloading the dataset...")
-    subprocess.call(["bash", "download_dataset.sh"])
-    print("Downloaded the dataset!")
+# # ----------------------------------------------------------------------------------------------------------------------
+# for DIR in ['../../../datasets/ozgenel/panoptic', '../../../datasets/ozgenel/annotations']:
+#     if os.path.exists(DIR) and os.path.isdir(DIR):
+#         shutil.rmtree(DIR)
+#     if not os.path.exists(DIR):  # make empty folders
+#         os.makedirs(DIR)
+# # ----------------------------------------------------------------------------------------------------------------------
+# if download:
+#     print("Downloading the dataset...")
+#     subprocess.call(["bash", "download_dataset.sh"])
+#     print("Downloaded the dataset!")
 # #######################################################################################################################
 # Fix file name issues
 if fix:

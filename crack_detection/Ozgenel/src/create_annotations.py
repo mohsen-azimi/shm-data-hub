@@ -72,13 +72,13 @@ class CreateCocoFormatInstances():
         print(f"{num_features} instances found in {mask_image}")
         mask = labeled_array.astype(np.uint8)  # panoptic masks: 0: Concrete, 1+ == Crack
 
-        colors = np.array(
+        self.colors = np.array(
             [[115, 115, 115], [255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255], [0, 255, 255],
              [255, 255, 255],
              [155, 0, 0], [0, 155, 0], [0, 0, 155], [155, 155, 0], [155, 0, 155], [0, 155, 155], [155, 155, 155]])
 
-        mask_rgb = colors[mask]
-        cv2.imwrite("../../../datasets/ozgenel/panoptic/" + self.cache_file_name.split(".")[0] + ".png", mask_rgb)
+        self.cache_mask_rgb = self.colors[mask]
+        cv2.imwrite("../../../datasets/ozgenel/panoptic/" + self.cache_file_name.split(".")[0] + ".png", self.cache_mask_rgb)
 
         # update the coco format with the image info
         image = {
@@ -134,8 +134,18 @@ class CreateCocoFormatInstances():
 
             # print("--", hierarchy)
             for contour in contours:
-                if cv2.contourArea(contour) > 0:
+
+
+                # cv2.imshow('Contours', sub_mask)
+                # cv2.waitKey(0)
+
+
+                if cv2.contourArea(contour) > 10:
                     if self.cache_category_id != 0:  # not concrete  = crack
+                        # img_contours = np.zeros(self.cache_mask_rgb.shape)
+                        # cv2.drawContours(img_contours, contours, -1, (0,255,0), 3)
+                        # cv2.imwrite("../../../datasets/ozgenel/panoptic/" + self.cache_file_name.split(".")[0] + f"_sub{sub_mask_id}.png", img_contours)
+
                         self.coco_instance["annotations"].append({
                             "iscrowd": 0,
                             "id": self.cache_insSeg_id,
